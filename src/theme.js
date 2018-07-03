@@ -74,12 +74,13 @@ module.exports = function(options){
         view: 'pages/components/detail.nunj'
     }, getHandles);
 
-    theme.addRoute('/components/raw/:handle/:asset', {
+    // Custom resources route
+    theme.addRoute('/components/raw/:handle/resources/:asset', {
         handle: 'component-resource',
         static: function(params, app){
             const component = app.components.find(`@${params.handle}`);
             if (component) {
-                return Path.join(component.viewDir, params.asset);
+                return Path.join(component.viewDir, 'resources', params.asset);
             }
             throw new Error('Component not found');
         }
